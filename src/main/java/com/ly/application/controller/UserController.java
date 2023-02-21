@@ -1,5 +1,6 @@
 package com.ly.application.controller;
 
+import com.ly.application.aspect.LogAspect;
 import com.ly.application.entity.SystemUser;
 import com.ly.application.redis.IRedis;
 import com.ly.application.utils.R;
@@ -17,6 +18,7 @@ public class UserController {
     private IRedis redis;
 
     @PostMapping("/login")
+    @LogAspect(value = "测试")
     public R login(@RequestBody SystemUser user) {
         redis.set("String", 1);
         System.out.println("1111");
