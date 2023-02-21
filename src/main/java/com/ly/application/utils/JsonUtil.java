@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.NumberSerializers;
@@ -143,10 +144,65 @@ public class JsonUtil {
         }
     }
 
-//    public static <K, V> Map<K, V> toMap(Object var1) {
-//
-//        return objectMapper.readValue(to)
-//    }
+    public static <T> Map<String, T> toMap(String var1) {
+        if (StrUtil.isBlank(var1)) {
+            return null;
+        }
+        try {
+            return toObject(var1, new TypeReference<Map<String, T>>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected static <T> T toObject(String var1, TypeReference<T> var2) throws JsonProcessingException {
+        return objectMapper.readValue(var1, var2);
+
+    }
+
+    public static <T> List<Map<String, T>> toListMaps(String var1) {
+        if (StrUtil.isBlank(var1)) {
+            return null;
+        }
+        try {
+            return toObject(var1, new TypeReference<List<Map<String, T>>>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static <T> Map<String, T> beanToMap(Object var1) {
+        if (null == var1)
+            return null;
+        return toMap(toJson(var1));
+    }
+
+    public static <T> T mapToBean(Map<String, T> var1, Class<T> var2) {
+        if (null == var1 || var2 == null) {
+            return null;
+        }
+        return toBean(mapToJson(var1), var2);
+    }
+
+    public static <T> String mapToJson(Map<String, T> var1) {
+        if (null == var1) {
+            return null;
+        }
+        try {
+            return objectMapper.writeValueAsString(var1);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static <T> T convert(Object var1, Class<T> var2) {
+        if (null == var1 || var2 == null) {
+            return null;
+        }
+        return objectMapper.convertValue(var1, var2);
+    }
 
 
 }
