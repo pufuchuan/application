@@ -1,9 +1,17 @@
 server:
-  port: 8090
+  port: 8080
 
 mybatis:
-  config-location: classpath:mybatis-config.xml
-  mapper-locations: classpath:mybatis/mapper/*.xml
+  #config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  check-config-location: true
+  global-config:
+    db-config:
+      #表名下划线命名默认true
+      table-underline: true
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,3 +25,8 @@ spring:
       port: 6379 #redis服务器连接端口
       password: #redis服务器连接密码，默认为null
       timeout: 5000 #redis连接超时时间
+logging:
+  pattern:
+    level: debug
+    console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %clr([%L]) %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+
