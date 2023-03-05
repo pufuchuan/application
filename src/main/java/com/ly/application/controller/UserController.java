@@ -22,7 +22,7 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping("/login")
-   // @LogAspect(value = "测试")
+    @LogAspect(value = "测试")
     public R login(@RequestBody SystemUser user) {
         redis.set("String", 1);
         System.out.println("1111");

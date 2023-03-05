@@ -17,6 +17,9 @@ public class UserServiceImpl implements IUserService {
     @Override
     public SystemUser login(String account, String password) {
         SystemUser login = mapper.login(account, password);
+        if(null != login){
+
+        }
         return login;
     }
 }

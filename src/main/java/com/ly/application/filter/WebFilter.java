@@ -2,6 +2,7 @@ package com.ly.application.filter;
 
 
 import jakarta.servlet.*;
+import org.apache.catalina.connector.RequestFacade;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
@@ -15,13 +16,18 @@ public class WebFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("");
-        filterChain.doFilter(servletRequest, servletResponse);
+        RequestFacade requestFacade = (RequestFacade) request;
+        filterChain.doFilter(request, response);
     }
 
     @Override
     public void destroy() {
         Filter.super.destroy();
+    }
+
+    private void log(){
+
     }
 }

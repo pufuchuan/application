@@ -33,7 +33,6 @@ public class UserContext {
         return (T) o;
     }
 
-
     public static <T> void put(String key, T value) {
         var context = getThreadLocalContext();
         context.set(key, value);
