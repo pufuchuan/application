@@ -2,7 +2,7 @@ package com.ly.application.exception;
 
 public class BusinessException extends RuntimeException {
 
-    private int errorCode = 500;
+    private static int errorCode = 500;
 
     public BusinessException(String msg, int errorCode) {
         super(msg);

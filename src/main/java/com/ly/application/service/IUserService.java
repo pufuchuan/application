@@ -4,5 +4,7 @@ import com.ly.application.entity.SystemUser;
 
 public interface IUserService {
 
-    SystemUser login(String account, String password);
+    String login(String account, String password);
+
+    void addUser(SystemUser user);
 }

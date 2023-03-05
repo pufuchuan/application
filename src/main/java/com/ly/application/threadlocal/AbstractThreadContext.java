@@ -25,7 +25,9 @@ public abstract class AbstractThreadContext {
     public <T> T get(final String key) {
         ThreadLocal<Map<String, Object>> context = getThreadContext();
         Map<String, Object> map = context.get();
-        return null == map ? null : (T) map;
+        if (null == map)
+            return null;
+        else return (T) map.get(key);
     }
 
     public void removeKey(final String key) {

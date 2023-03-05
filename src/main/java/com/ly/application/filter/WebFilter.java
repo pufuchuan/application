@@ -27,7 +27,4 @@ public class WebFilter implements Filter {
         Filter.super.destroy();
     }
 
-    private void log(){
-
-    }
 }

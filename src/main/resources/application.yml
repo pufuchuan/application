@@ -30,3 +30,8 @@ logging:
     level: debug
     console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %clr([%L]) %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
 
+config:
+  jwt:
+    secret: lyyAdmin123
+    header: token
+    expire: 3600

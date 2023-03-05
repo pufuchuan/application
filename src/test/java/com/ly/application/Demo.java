@@ -1,8 +1,10 @@
 package com.ly.application;
 
 import com.ly.application.redis.RedisImpl;
+import com.ly.application.service.IUserService;
 import com.ly.application.utils.JsonUtil;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Method;
 
@@ -10,11 +12,11 @@ import static java.lang.Class.forName;
 
 public class Demo {
 
+    @Autowired
+    private IUserService userService;
+
     @Test
     public void test() throws ClassNotFoundException {
-        Class clazz = RedisImpl.class;
-        Method[] methods = clazz.getMethods();
-        Class<? extends Class> clazzClass = clazz.getClass();
-        Class clazs =  Class.forName("RedisImpl");
+        System.out.println(userService.login("123", "123"));
     }
 }

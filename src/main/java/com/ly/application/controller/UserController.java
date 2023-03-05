@@ -19,9 +19,15 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping("/login")
-    @LogAspect(value = "测试")
+    @LogAspect(value = "登录")
     public R login(@RequestBody SystemUser user) {
-        SystemUser login = userService.login("123", "123");
-        return R.success(login);
+        return R.success(userService.login("123", "123"));
+    }
+
+    @PostMapping("/add")
+    @LogAspect(value = "添加用户")
+    public R addUser(@RequestBody SystemUser user) {
+        userService.addUser(user);
+        return R.success();
     }
 }
